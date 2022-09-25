@@ -15,25 +15,22 @@ function App() {
   }
   const addTodoFunc = (title, desc) =>{
     console.log("I am adding this todo", title,desc);
-  }
-  const [todosArray, setTodosArray] = useState([
-    {
-      sno: 1,
-      title: "hi",
-      desc:"i am happy"
-    },
-    {
-      sno: 2,
-      title: "hi2222",
-      desc:"i am happy222"
-    },
-    {
-      sno: 3,
-      title: "hi333",
-      desc:"i am happy333"
+    let sno;
+    if(todosArray.length==0){
+      sno = 0;
     }
-
-  ]);
+    else{
+      sno = todosArray[todosArray.length-1].sno + 1;
+    }
+    const myObjTodo = {
+      sno: sno,
+      title:title,
+      desc:desc,
+    }
+    setTodosArray([...todosArray, myObjTodo]);
+    console.log(myObjTodo);
+  }
+  const [todosArray, setTodosArray] = useState([]);
   return (
     <>
       <Navbar title="App Todo List"/>

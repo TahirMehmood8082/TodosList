@@ -4,7 +4,8 @@ import Navbar from './components/NavBar';
 import { TodoList } from './components/TodoList';
 import React, { useState, useEffect } from 'react';
 import { AddTodo } from './components/AddTodo';
-
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { About } from './components/About';
 function App() {
   let initTodo;
   if(localStorage.getItem("todosFromLocalStorage") === null ){
@@ -31,7 +32,7 @@ function App() {
   const addTodoFunc = (title, desc) =>{
     console.log("I am adding this todo", title,desc);
     let sno;
-    if(todosArray.length==0){
+    if(todosArray.length===0){
       sno = 0;
     }
     else{
@@ -51,10 +52,19 @@ function App() {
   /// return of App
   return (
     <>
-      <Navbar title="App Todo List"/>
-      <AddTodo addTodoFunction={addTodoFunc}/>
-      <TodoList todosArrayFromApp = {todosArray} onDeleteFromApp = {onDelete}/>
-      <Footer/>
+      <Router>
+        <Navbar title="App Todo List"/>
+          <Routes>
+            <Route exact path='/' element={<> 
+            
+              {<AddTodo addTodoFunction={addTodoFunc}/>}
+              {<TodoList todosArrayFromApp = {todosArray} onDeleteFromApp = {onDelete}/>}
+            
+            </>} />
+            <Route exact path="/about" element={<About/>}/>
+          </Routes>
+        <Footer/>
+      </Router>
     </>
   );
 }

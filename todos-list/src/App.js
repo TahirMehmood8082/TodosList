@@ -3,6 +3,7 @@ import { Footer } from './components/Footer';
 import Navbar from './components/NavBar';
 import { TodoList } from './components/TodoList';
 import React, { useState } from 'react';
+import { AddTodo } from './components/AddTodo';
 
 function App() {
   const onDelete = (todoItemFromList)=>{
@@ -11,6 +12,9 @@ function App() {
     setTodosArray(todosArray.filter((e)=>{
       return e!==todoItemFromList;
     }))
+  }
+  const addTodoFunc = (title, desc) =>{
+    console.log("I am adding this todo", title,desc);
   }
   const [todosArray, setTodosArray] = useState([
     {
@@ -33,6 +37,7 @@ function App() {
   return (
     <>
       <Navbar title="App Todo List"/>
+      <AddTodo addTodoFunction={addTodoFunc}/>
       <TodoList todosArrayFromApp = {todosArray} onDeleteFromApp = {onDelete}/>
       <Footer/>
     </>
